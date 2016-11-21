@@ -27,4 +27,4 @@ Zone
 - Fire -> Smoke Detector, Tamper Alert (for trouble condition)
 - Gas -> Carbon Monoxide Detector, Tamper Alert (for trouble condition)
 
-You can download the [HAILogger application here](http://www.excalibur-partners.com/downloads/HAILogger_1_0_5.zip)
+You can download the [HAILogger application here](http://www.excalibur-partners.com/downloads/HAILogger_1_0_6.zip)
