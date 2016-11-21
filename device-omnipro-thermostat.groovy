@@ -104,39 +104,46 @@ def parseFromParent(data) {
 	
 	switch (data.mode) {
 		case "0":        
-			sendEvent(name: "thermostatMode", value: "off")
+			sendEvent(name: "thermostatMode", value: "off", displayed: false)
 			break	
 		case "1":
-			sendEvent(name: "thermostatMode", value: "heat")
+			sendEvent(name: "thermostatMode", value: "heat", displayed: false)
 			break	
 		case "2":
-			sendEvent(name: "thermostatMode", value: "cool")
+			sendEvent(name: "thermostatMode", value: "cool", displayed: false)
 			break	
 		case "3":
-			sendEvent(name: "thermostatMode", value: "auto")
+			sendEvent(name: "thermostatMode", value: "auto", displayed: false)
 			break	
 		case "4":
-			sendEvent(name: "thermostatMode", value: "emergency heat")
+			sendEvent(name: "thermostatMode", value: "emergency heat", displayed: false)
 			break	
     }
 	
 	switch (data.fanmode) {
 		case "0":        
-			sendEvent(name: "thermostatFanMode", value: "auto")
+			sendEvent(name: "thermostatFanMode", value: "auto", displayed: false)
 			break	
 		case "1":
-			sendEvent(name: "thermostatFanMode", value: "on")
+			sendEvent(name: "thermostatFanMode", value: "on", displayed: false)
 			break	
 		case "2":
-			sendEvent(name: "thermostatFanMode", value: "circulate")
+			sendEvent(name: "thermostatFanMode", value: "circulate", displayed: false)
 			break	
     }
 	
-	sendEvent(name: "temperature", value: data.temp)
-	sendEvent(name: "coolingSetpoint", value: data.coolsetpoint)
-	sendEvent(name: "heatingSetpoint", value: data.heatsetpoint)
+	if (data.status == "HEATING")
+		sendEvent(name: "thermostatOperatingState", value: "heating", displayed: false)
+	else if (data.status == "COOLING")
+		sendEvent(name: "thermostatOperatingState", value: "cooling", displayed: false)
+	else
+		sendEvent(name: "thermostatOperatingState", value: "idle", displayed: false)
 	
-	sendEvent(name: "relativeHumidityMeasurement", value: data.humidity)
+	sendEvent(name: "temperature", value: data.temp, displayed: false)
+	sendEvent(name: "coolingSetpoint", value: data.coolsetpoint, displayed: false)
+	sendEvent(name: "heatingSetpoint", value: data.heatsetpoint, displayed: false)
+	
+	sendEvent(name: "relativeHumidityMeasurement", value: data.humidity, displayed: false)
 }
 
 // handle commands

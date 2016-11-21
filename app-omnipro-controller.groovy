@@ -138,6 +138,13 @@ void setupDevices() {
     //log.debug hubActionCO
     sendHubCommand(hubActionCO)
 	
+	// Temp
+	def hubActionTemp	= new physicalgraph.device.HubAction("""GET /ListZonesTemp HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
+		physicalgraph.device.Protocol.LAN, host, [callback: deviceTempSetupHandler])
+	
+    //log.debug hubActionTemp
+    sendHubCommand(hubActionTemp)
+	
 	// Unit
 	def hubActionUnit	= new physicalgraph.device.HubAction("""GET /ListUnits HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceUnitSetupHandler])
@@ -152,6 +159,13 @@ void setupDevices() {
 	
     //log.debug hubActionThermostat
     sendHubCommand(hubActionThermostat)
+	
+	// Buttons
+	def hubActionButton = new physicalgraph.device.HubAction("""GET /ListButtons HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
+		physicalgraph.device.Protocol.LAN, host, [callback: deviceButtonSetupHandler])
+	
+    //log.debug hubActionButton
+    sendHubCommand(hubActionButton)
 }
 
 void deviceAreaSetupHandler(physicalgraph.device.HubResponse hubResponse) {
@@ -202,6 +216,14 @@ void deviceCarbonMonoxideSetupHandler(physicalgraph.device.HubResponse hubRespon
 	createChildDevices('CO', 'OmniPro Carbon Monoxide', devices)
 }
 
+void deviceTempSetupHandler(physicalgraph.device.HubResponse hubResponse) {
+	log.debug "Firing 'deviceTempSetupHandler(${hubResponse.body})'"
+    def devices = hubResponse.json
+	log.debug "${hubResponse.error}"
+	
+	createChildDevices('TEMP', 'OmniPro Temp', devices)
+}
+
 void deviceUnitSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceUnitSetupHandler(${hubResponse.body})'"
     def devices = hubResponse.json
@@ -216,6 +238,14 @@ void deviceThermostatSetupHandler(physicalgraph.device.HubResponse hubResponse) 
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('THERMOSTAT', 'OmniPro Thermostat', devices)
+}
+
+void deviceButtonSetupHandler(physicalgraph.device.HubResponse hubResponse) {
+	log.debug "Firing 'deviceButtonSetupHandler(${hubResponse.body})'"
+    def devices = hubResponse.json
+	log.debug "${hubResponse.error}"
+	
+	createChildDevices('BUTTON', 'OmniPro Button', devices)
 }
 
 void removeDevices() {

@@ -1,5 +1,5 @@
 /**
- *  OmniPro Contact
+ *  OmniPro Area
  *
  *  Copyright 2016 Ryan Wagoner
  *
