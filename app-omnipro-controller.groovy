@@ -24,12 +24,14 @@ definition(
     iconX3Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png") {
 	appSetting "server"
 	appSetting "port"
+        appSetting "area"
 }
 
 preferences {
 	section("Settings") {
 		input("server", "string", title:"Server", required: true, displayDuringSetup: true)
 		input("port", "string", title:"Port", required: true, displayDuringSetup: true)
+		input("area", "string", title:"Follow Area ID", required: true, displayDuringSetup: true)
 	}
 }
 
@@ -54,14 +56,14 @@ def initialize() {
 }
 
 def uninstalled() {
-    removeChildDevices(getChildDevices())
+	removeChildDevices(getChildDevices())
 }
 
 void subscribeController() {
 	log.debug "Subscribing controller"
 
-    def callback = getCallBackAddress()
-    def host = "${settings.server}:${settings.port}"
+	def callback = getCallBackAddress()
+	def host = "${settings.server}:${settings.port}"
 
 	def body = '{ "callback": "http://' + callback + '/notify/omnilink" }'
 	def length = body.getBytes().size().toString()
@@ -69,8 +71,8 @@ void subscribeController() {
 	def hubAction = new physicalgraph.device.HubAction("""POST /Subscribe HTTP/1.1\r\nHOST: $host\r\nContent-Type: application/json\r\nContent-Length: $length\r\n\r\n$body\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: subscribeControllerHandler])
 		
-    //log.debug hubAction
-    sendHubCommand(hubAction)
+	//log.debug hubAction
+	sendHubCommand(hubAction)
 }
 
 void subscribeControllerHandler(physicalgraph.device.HubResponse hubResponse) {
@@ -94,83 +96,83 @@ void subscribeControllerHandler(physicalgraph.device.HubResponse hubResponse) {
 void setupDevices() {
 	log.debug 'setupDevices'
 
-    def host = "${settings.server}:${settings.port}"
+	def host = "${settings.server}:${settings.port}"
 	
 	// Area
 	def hubActionArea	= new physicalgraph.device.HubAction("""GET /ListAreas HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceAreaSetupHandler])
 	
-    //log.debug hubActionArea
-    sendHubCommand(hubActionArea)
+	//log.debug hubActionArea
+	sendHubCommand(hubActionArea)
 	
 	// Contact
 	def hubActionContact	= new physicalgraph.device.HubAction("""GET /ListZonesContact HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceContactSetupHandler])
 	
-    //log.debug hubActionContact
-    sendHubCommand(hubActionContact)
+	//log.debug hubActionContact
+	sendHubCommand(hubActionContact)
 	
 	// Motion
 	def hubActionMotion	= new physicalgraph.device.HubAction("""GET /ListZonesMotion HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceMotionSetupHandler])
 	
-    //log.debug hubActionMotion
-    sendHubCommand(hubActionMotion)
+	//log.debug hubActionMotion
+	sendHubCommand(hubActionMotion)
 	
 	// Water
 	def hubActionWater	= new physicalgraph.device.HubAction("""GET /ListZonesWater HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceWaterSetupHandler])
 	
-    //log.debug hubActionWater
-    sendHubCommand(hubActionWater)
+	//log.debug hubActionWater
+	sendHubCommand(hubActionWater)
 	
 	// Smoke
 	def hubActionSmoke	= new physicalgraph.device.HubAction("""GET /ListZonesSmoke HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceSmokeSetupHandler])
 	
-    //log.debug hubActionSmoke
-    sendHubCommand(hubActionSmoke)
+	//log.debug hubActionSmoke
+	sendHubCommand(hubActionSmoke)
 	
 	// CO
 	def hubActionCO	= new physicalgraph.device.HubAction("""GET /ListZonesCO HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceCarbonMonoxideSetupHandler])
 	
-    //log.debug hubActionCO
-    sendHubCommand(hubActionCO)
+	//log.debug hubActionCO
+	sendHubCommand(hubActionCO)
 	
 	// Temp
 	def hubActionTemp	= new physicalgraph.device.HubAction("""GET /ListZonesTemp HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceTempSetupHandler])
 	
-    //log.debug hubActionTemp
-    sendHubCommand(hubActionTemp)
+	//log.debug hubActionTemp
+	sendHubCommand(hubActionTemp)
 	
 	// Unit
 	def hubActionUnit	= new physicalgraph.device.HubAction("""GET /ListUnits HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceUnitSetupHandler])
 	
-    //log.debug hubActionUnit
-    sendHubCommand(hubActionUnit)
+	//log.debug hubActionUnit
+	sendHubCommand(hubActionUnit)
 	
 	
 	// Thermostat
 	def hubActionThermostat = new physicalgraph.device.HubAction("""GET /ListThermostats HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceThermostatSetupHandler])
 	
-    //log.debug hubActionThermostat
-    sendHubCommand(hubActionThermostat)
+	//log.debug hubActionThermostat
+	sendHubCommand(hubActionThermostat)
 	
 	// Buttons
 	def hubActionButton = new physicalgraph.device.HubAction("""GET /ListButtons HTTP/1.1\r\nHOST: $host\r\n\r\n""", 
 		physicalgraph.device.Protocol.LAN, host, [callback: deviceButtonSetupHandler])
 	
-    //log.debug hubActionButton
-    sendHubCommand(hubActionButton)
+	//log.debug hubActionButton
+	sendHubCommand(hubActionButton)
 }
 
 void deviceAreaSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceAreaSetupHandler(${hubResponse.body})'"
-    def devices = hubResponse.json
+	def devices = hubResponse.json
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('AREA', 'OmniPro Area', devices)
@@ -178,7 +180,7 @@ void deviceAreaSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 
 void deviceContactSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceContactSetupHandler(${hubResponse.body})'"
-    def devices = hubResponse.json
+	def devices = hubResponse.json
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('CONTACT', 'OmniPro Contact', devices)
@@ -186,7 +188,7 @@ void deviceContactSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 
 void deviceMotionSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceMotionSetupHandler(${hubResponse.body})'"
-    def devices = hubResponse.json
+	def devices = hubResponse.json
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('MOTION', 'OmniPro Motion', devices)
@@ -194,7 +196,7 @@ void deviceMotionSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 
 void deviceWaterSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceWaterSetupHandler(${hubResponse.body})'"
-    def devices = hubResponse.json
+	def devices = hubResponse.json
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('WATER', 'OmniPro Water', devices)
@@ -202,7 +204,7 @@ void deviceWaterSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 
 void deviceSmokeSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceSmokeSetupHandler(${hubResponse.body})'"
-    def devices = hubResponse.json
+	def devices = hubResponse.json
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('SMOKE', 'OmniPro Smoke', devices)
@@ -210,7 +212,7 @@ void deviceSmokeSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 
 void deviceCarbonMonoxideSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceCarbonMonoxideSetupHandler(${hubResponse.body})'"
-    def devices = hubResponse.json
+	def devices = hubResponse.json
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('CO', 'OmniPro Carbon Monoxide', devices)
@@ -218,7 +220,7 @@ void deviceCarbonMonoxideSetupHandler(physicalgraph.device.HubResponse hubRespon
 
 void deviceTempSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceTempSetupHandler(${hubResponse.body})'"
-    def devices = hubResponse.json
+	def devices = hubResponse.json
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('TEMP', 'OmniPro Temp', devices)
@@ -226,7 +228,7 @@ void deviceTempSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 
 void deviceUnitSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceUnitSetupHandler(${hubResponse.body})'"
-    def devices = hubResponse.json
+	def devices = hubResponse.json
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('UNIT', 'OmniPro Unit', devices)
@@ -234,7 +236,7 @@ void deviceUnitSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 
 void deviceThermostatSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceThermostatSetupHandler(${hubResponse.body})'"
-    def devices = hubResponse.json
+	def devices = hubResponse.json
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('THERMOSTAT', 'OmniPro Thermostat', devices)
@@ -242,7 +244,7 @@ void deviceThermostatSetupHandler(physicalgraph.device.HubResponse hubResponse) 
 
 void deviceButtonSetupHandler(physicalgraph.device.HubResponse hubResponse) {
 	log.debug "Firing 'deviceButtonSetupHandler(${hubResponse.body})'"
-    def devices = hubResponse.json
+	def devices = hubResponse.json
 	log.debug "${hubResponse.error}"
 	
 	createChildDevices('BUTTON', 'OmniPro Button', devices)
@@ -274,23 +276,23 @@ private createChildDevices(type, typeName, devices)
 }
 
 private removeChildDevices(delete) {
-    delete.each {
-        deleteChildDevice(it.deviceNetworkId)
-    }
+	delete.each {
+		deleteChildDevice(it.deviceNetworkId)
+	}
 }
 
 private getCallBackAddress() {
-    return  location.hubs[0].localIP + ":" +  location.hubs[0].localSrvPortTCP
+	return location.hubs[0].localIP + ":" +  location.hubs[0].localSrvPortTCP
 }
 
 private String convertIPtoHex(ipAddress) { 
-    String hex = ipAddress.tokenize( '.' ).collect {  String.format( '%02X', it.toInteger() ) }.join()
-    return hex
+	String hex = ipAddress.tokenize( '.' ).collect {  String.format( '%02X', it.toInteger() ) }.join()
+	return hex
 }
 
 private String convertPortToHex(port) {
-    String hexport = port.toString().format( '%04X', port.toInteger() )
-    return hexport
+	String hexport = port.toString().format( '%04X', port.toInteger() )
+	return hexport
 }
 
 def passToChild(type, data) {

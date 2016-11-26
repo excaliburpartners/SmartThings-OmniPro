@@ -56,7 +56,7 @@ def parse(String description) {
 
 def parseFromParent(data) {
 	log.debug "Parsing from parent '${data}'"
-	sendEvent(name: "temperature", value: data.temp)
+	sendEvent(name: "temperature", value: data.temp, displayed: false)
 }
 
 // handle commands
