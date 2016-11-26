@@ -1,6 +1,16 @@
 # SmartThings-OmniPro
-The included SmartApp and Device Handlers provide integration between Samsung SmartThings and HAI/Leviton OmniPro II controllers utilizing the HAILogger application as a middleman. The HAILogger connects using the HAI SDK to the controller and provides a web service for SmartThings to connect to.
+The included SmartApp and Device Handlers provide integration between Samsung SmartThings and HAI/Leviton OmniPro II controllers utilizing the HAILogger application as a middle layer. The [HAILogger](https://github.com/excaliburpartners/HAILogger) connects using the HAI SDK to the controller and provides a web service for SmartThings to interface with.
 
+##Installation
+1. Login to the [SmartThings IDE](https://graph.api.smartthings.com/)
+2. Click My Locations, then select your location
+2. Click My Device Handlers, select From Code, paste the contents from GitHub and repeat for all device files
+3. Click My SmartApps, select From Code, paste the contents from GitHub
+4. Open the SmartThings app on your phone
+5. Select Marketplace -> SmartApps -> scroll to bottom My Apps
+6. Select OmniPro Integration and enter the IP address of the computer running HAILogger and port 8000
+
+## Discovery
 The SmartApp will auto discover and add the devices from the OmniPro controller. The current hard coded mapping is below. By configuring the SmartThings Smart Home Monitor as armed and monitoring the area contact sensor SmartThings can react to OmniPro II area burlgary alarms.
 
 Unit -> Switch, Switch Level
@@ -26,5 +36,3 @@ Zone
 - Water -> Water Sensor
 - Fire -> Smoke Detector, Tamper Alert (for trouble condition)
 - Gas -> Carbon Monoxide Detector, Tamper Alert (for trouble condition)
-
-You can download the [HAILogger application here](http://www.excalibur-partners.com/downloads/HAILogger_1_0_6.zip)
