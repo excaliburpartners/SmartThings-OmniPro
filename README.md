@@ -31,8 +31,8 @@ AWAY -> Away
 VACATION -> Vacation 
  
 Zone
-- Entry/Exit, X2EntryDelay, X24EntryDelay, Perimeter -> Contact Sensor
-- AwayInt -> Motion Sensor
+- Entry/Exit, X2EntryDelay, X24EntryDelay, Perimeter, Tamper, Auxiliary -> Contact Sensor
+- AwayInt, NightInt -> Motion Sensor
 - Water -> Water Sensor
 - Fire -> Smoke Detector, Tamper Alert (for trouble condition)
 - Gas -> Carbon Monoxide Detector, Tamper Alert (for trouble condition)

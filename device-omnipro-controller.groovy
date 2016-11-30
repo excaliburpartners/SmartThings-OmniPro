@@ -36,6 +36,10 @@ metadata {
 def parse(String description) {
 	log.debug "Parsing '${description}'"
 	def msg = parseLanMessage(description)
+	
+	if(msg.headers['type'] == null)
+		return
+	
 	def type = msg.headers['type'].toUpperCase();	
 	def data = msg.json
 	log.debug "Parsed ${type} - ${data}"

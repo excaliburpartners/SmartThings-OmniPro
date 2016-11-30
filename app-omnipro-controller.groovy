@@ -30,8 +30,8 @@ definition(
 preferences {
 	section("Settings") {
 		input("server", "string", title:"Server", required: true, displayDuringSetup: true)
-		input("port", "string", title:"Port", required: true, displayDuringSetup: true)
-		input("area", "string", title:"Follow Area ID", required: true, displayDuringSetup: true)
+		input("port", "string", title:"Port", defaultValue: "8000", required: true, displayDuringSetup: true)
+		input("area", "string", title:"Follow Area ID", defaultValue: "1", displayDuringSetup: true)
 	}
 }
 
@@ -263,7 +263,6 @@ private createChildDevices(type, typeName, devices)
 		if (!d) {
 			d = addChildDevice("excaliburpartners", typeName, dni, location.hubs[0].id, [
 				"name": it.name,
-				"lael": it.name,
 				"completedSetup": true,
 			])
 			log.debug "Created ${d.displayName} with id $dni"
@@ -302,7 +301,7 @@ def passToChild(type, data) {
 	if (d) {
 		d.parseFromParent(data);
 	} else {
-		log.warn 'passToChild device $dni missing'
+		log.warn "passToChild device $dni missing"
 	}	
 }
 

@@ -76,7 +76,7 @@ def parseFromParent(data) {
 	
 	sendEvent(name: "mode", value: data.mode.toLowerCase())
 	
-	if (data.id == parent.area) {
+	if (data.id.toString() == parent.area) {
 		if (data.mode == "NIGHT")
 			parent.setLocationMode("Night")
 		else if (data.mode == "AWAY")
