@@ -25,10 +25,10 @@ Area
 - Security Mode -> No capability mapping
  
 When the OmniPro Area 1 security mode changes the SmartThings hub mode will change as well
-OFF, DAY -> Home
-NIGHT -> Night
-AWAY -> Away
-VACATION -> Vacation 
+- OFF, DAY -> Home
+- NIGHT -> Night
+- AWAY -> Away
+- VACATION -> Vacation 
  
 Zone
 - Entry/Exit, X2EntryDelay, X24EntryDelay, Perimeter, Tamper, Auxiliary -> Contact Sensor
