@@ -21,7 +21,7 @@ metadata {
 		capability "Water Sensor"
 		capability "Refresh"
 		
-		attribute "mode", "string"
+		attribute "areamode", "string"
 	}
 
 	simulator {
@@ -30,7 +30,7 @@ metadata {
 
 	tiles {
 	
-		standardTile("button", "device.mode", width: 3, height: 2, canChangeIcon: true) {
+		standardTile("button", "device.areamode", width: 3, height: 2, canChangeIcon: true) {
 			state "off", label: 'off', backgroundColor:"#79b821"
 			state "day", label: 'day', backgroundColor:"#ffa81e"
 			state "night", label: 'night', backgroundColor:"#ffa81e"
@@ -74,7 +74,7 @@ def parse(String description) {
 def parseFromParent(data) {
 	log.debug "Parsing from parent '${data}'"
 	
-	sendEvent(name: "mode", value: data.mode.toLowerCase())
+	sendEvent(name: "areamode", value: data.mode.toLowerCase())
 	
 	if (data.id.toString() == parent.area) {
 		if (data.mode == "NIGHT")
