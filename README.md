@@ -1,17 +1,21 @@
 # SmartThings-OmniPro
-The included SmartApp and Device Handlers provide integration between Samsung SmartThings and HAI/Leviton OmniPro II controllers utilizing the HAILogger application as a middle layer. The [HAILogger](https://github.com/excaliburpartners/HAILogger) connects using the HAI SDK to the controller and provides a web service for SmartThings to interface with.
+The included SmartApp and Device Handlers provide integration between Samsung SmartThings and HAI/Leviton OmniPro II controllers utilizing [OmniLinkBridge](https://github.com/excaliburpartners/OmniLinkBridge). The bridge connects to the controller and provides a web service API for the SmartThings hub to interface with.
 
-##Installation
+## Installation
 1. Login to the [SmartThings IDE](https://graph.api.smartthings.com/)
-2. Click My Locations, then select your location
-2. Click My Device Handlers, select From Code, paste the contents from GitHub and repeat for all device files
-3. Click My SmartApps, select From Code, paste the contents from GitHub
-4. Open the SmartThings app on your phone
-5. Select Marketplace -> SmartApps -> scroll to bottom My Apps
-6. Select OmniPro Integration and enter the IP address of the computer running HAILogger and port 8000
+2. Under My SmartApps, click Enable GitHub Integration
+3. Under My SmartApps, click Settings, Add new repository
+	- Owner: excaliburpartners
+	- Name: SmartThings-OmniPro
+	- Branch: master
+4. Under My SmartApps, click Update from Repo, check excaliburpartners:OmniPro Integration, check publish, click Execute Update
+5. Under My Device Handlers, click Update from Repo, check all for excaliburpartners:OmniPro, check publish, click Execute Update
+6. Open the SmartThings app on your phone
+7. Select Marketplace, SmartApps, scroll to bottom My Apps
+8. Select OmniPro Integration and enter the IP address of the computer running OmniLinkBridge and port 8000
 
 ## Discovery
-The SmartApp will auto discover and add the devices from the OmniPro controller. The current hard coded mapping is below. By configuring the SmartThings Smart Home Monitor as armed and monitoring the area contact sensor SmartThings can react to OmniPro II area burlgary alarms.
+The SmartApp will auto discover and add the devices from the OmniPro controller. The current hard coded mapping is below. By configuring the SmartThings Smart Home Monitor as armed and monitoring the area contact sensor SmartThings can react to OmniPro II area burglary alarms.
 
 Unit -> Switch, Switch Level
 
