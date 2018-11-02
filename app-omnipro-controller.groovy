@@ -263,6 +263,7 @@ private createChildDevices(type, typeName, devices)
 		if (!d) {
 			d = addChildDevice("excaliburpartners", typeName, dni, location.hubs[0].id, [
 				"name": it.name,
+				"label": it.name,
 				"completedSetup": true,
 			])
 			log.debug "Created ${d.displayName} with id $dni"
