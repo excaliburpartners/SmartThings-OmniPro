@@ -19,6 +19,7 @@ metadata {
 		capability "Smoke Detector"
 		capability "Carbon Monoxide Detector"
 		capability "Water Sensor"
+		capability "Sensor"
 		capability "Refresh"
 		
 		attribute "areamode", "string"

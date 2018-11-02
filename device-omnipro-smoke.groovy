@@ -17,6 +17,7 @@ metadata {
 	definition (name: "OmniPro Smoke", namespace: "excaliburpartners", author: "Ryan Wagoner") {
 		capability "Smoke Detector"
 		capability "Tamper Alert"
+		capability "Sensor"
 		capability "Refresh"
 	}
 

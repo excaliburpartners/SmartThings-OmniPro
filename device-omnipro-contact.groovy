@@ -16,6 +16,7 @@
 metadata {
 	definition (name: "OmniPro Contact", namespace: "excaliburpartners", author: "Ryan Wagoner") {
 		capability "Contact Sensor"
+		capability "Sensor"
 		capability "Refresh"
 	}
 

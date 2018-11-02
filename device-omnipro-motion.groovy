@@ -16,6 +16,7 @@
 metadata {
 	definition (name: "OmniPro Motion", namespace: "excaliburpartners", author: "Ryan Wagoner") {
 		capability "Motion Sensor"
+		capability "Sensor"
 		capability "Refresh"
 	}
 

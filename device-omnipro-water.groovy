@@ -16,6 +16,7 @@
 metadata {
 	definition (name: "OmniPro Water", namespace: "excaliburpartners", author: "Ryan Wagoner") {
 		capability "Water Sensor"
+		capability "Sensor"
 		capability "Refresh"
 	}
 
